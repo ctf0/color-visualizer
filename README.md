@@ -1,6 +1,4 @@
-# color visualizer
-
-A Pen created on CodePen.io. Original URL: [https://codepen.io/ctf0/pen/BwLezW](https://codepen.io/ctf0/pen/BwLezW).
+# C O L O R - V I S U A L I Z E R
 
 a small little fun tool to help visualize colors from a list.
 
