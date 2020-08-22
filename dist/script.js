@@ -1,0 +1,245 @@
+const body = document.documentElement;
+
+new Vue({
+  el: "#app",
+  name: "color-vis",
+  data: {
+    // color list
+    rawList: `#1ABC9C
+#16A085
+#2ECC71
+#27AE60
+#3498DB
+#2980B9
+#9B59B6
+#8E44AD
+#34495E
+#2C3E50
+#F1C40F
+#F39C12
+#E67E22
+#D35400
+#E74C3C
+#C0392B
+#ECF0F1
+#BDC3C7
+#95A5A6
+#7F8C8D`,
+    colorsNames: [],
+    colorsList: [],
+    removedColors: [],
+    codeFormat: "rgba",
+    // bubble
+    size: 100, // px
+    radius: 25, // %
+    padding: 10, // px
+    // misc
+    bg: "white",
+    txt: "black",
+    temp: "#EEEEEE00", // ignore
+    // show
+    showNames: false,
+    showCodes: false,
+    showSaveBtn: false,
+    // notifs
+    notifs: [],
+    notifDur: 3000 },
+
+
+  mounted() {
+    this.colorsList = this.rawList.split("\n");
+  },
+
+  computed: {
+    all() {
+      return {
+        "background-color": this.tc(this.txt),
+        color: this.tc(this.bg) };
+
+    },
+    inputsStyle() {
+      return {
+        "--brdr": this.tc(this.txt),
+        "--bg": this.tc(this.bg) };
+
+    },
+    text() {
+      return {
+        color: this.tc(this.txt) };
+
+    },
+    border() {
+      return {
+        "border-color": this.tc(this.txt) };
+
+    },
+    bubbleSize() {
+      return {
+        width: `${this.size}px`,
+        height: `${this.size}px`,
+        "border-radius": `${this.radius}%` };
+
+    },
+    bubblePad() {
+      return {
+        padding: `${this.padding}px` };
+
+    },
+    tippyOptions() {
+      return {
+        hideOnClick: "persistent",
+        placement: "top",
+        arrow: true,
+        inertia: true,
+        followCursor: true,
+        distance: 15,
+        theme: "honeybee" };
+
+    } },
+
+
+  methods: {
+    // color format
+    tc(e) {
+      let f = tinycolor(e);
+
+      if (f.isValid()) {
+        return f;
+      }
+    },
+    formatColor(e) {
+      if (this.codeFormat == "rgb") {
+        return this.tc(e).toHexString();
+      }
+
+      return this.tc(e).toHex8String();
+    },
+
+    // color names
+    resolveColorNames(arr) {
+      let list = arr.map(el => this.tc(el).toHex());
+      const url = "https://color-names.herokuapp.com/v1/" + list.join(",");
+      const vm = this;
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          return vm.colorsNames = JSON.parse(this.response).colors;
+        }
+      };
+      xhttp.open("GET", url, true);
+      xhttp.send();
+    },
+    getColorName(e) {
+      let v = this.tc(e).toHexString();
+      let cn = this.colorsNames;
+
+      if (cn.length) {
+        let found = cn.find(el => el.requestedHex == v);
+
+        return found ? found.name : "N/A";
+      }
+    },
+
+    // colors ops
+    copyColor(item) {
+      new Clipboard(".item");
+      this.notifs.push({
+        text: `${item} copied`,
+        show: true });
+
+    },
+    removeColor(item) {
+      let index = this.colorsList.indexOf(item);
+
+      this.removedColors.push({ i: index, v: item });
+      this.colorsList.splice(index, 1);
+      this.showSaveBtn = true;
+    },
+    undoRemovedColor() {
+      let rc = this.removedColors;
+      let item = rc[rc.length - 1];
+      let index = rc.indexOf(item);
+
+      this.removedColors.splice(index, 1);
+      this.colorsList.splice(item.i, 0, item.v);
+    },
+    sortColors() {
+      this.showSaveBtn = true;
+      this.colorsList = this.colorsList.sort();
+    },
+
+    // notif
+    hideNotif(i) {
+      setTimeout(() => {
+        return this.notifs[i].show = false;
+      }, this.notifDur);
+
+      return this.notifs[i].show;
+    },
+
+    // save list to desktop
+    saveList() {
+      let current = this.colorsList.join("\n");
+      let removed = this.removedColors.map(e => e.v).join("\n");
+
+      let str = removed ? current + "\n\n💩Removed\n\n" + removed : current;
+
+      saveAs(
+      new Blob([str], { type: "text/plaincharset=utf-8" }),
+      "colors-vis-List.txt");
+
+
+      this.notifs.push({
+        text: "File Saved To Desktop",
+        show: true });
+
+    },
+
+    // because vue cant handle this on its own
+    handleClick(e, color) {
+      if (e.shiftKey) {
+        return this.removeColor(color);
+      }
+
+      this.copyColor(this.formatColor(color));
+    } },
+
+
+  watch: {
+    // body styles
+    bg(val) {
+      body.style.setProperty("--bg", this.tc(val));
+    },
+    txt(val) {
+      body.style.setProperty("--txt", this.tc(val));
+    },
+
+    // colors
+    rawList(val) {
+      if (val) {
+        this.removedColors = [];
+        return this.colorsList = val.split("\n");
+      }
+
+      this.colorsList = [];
+    },
+    colorsList(val) {
+      if (val) {
+        if (val == this.rawList.split("\n").toString()) {
+          this.showSaveBtn = false;
+        }
+
+        this.resolveColorNames(val);
+      }
+    } } });
+
+
+
+// TODO
+// cleanup styles
+// reset data
+// text in contrast to the circle bg color
+// make grid like apple iwatch bubbles
+// blend colors
+// sort colors by code
