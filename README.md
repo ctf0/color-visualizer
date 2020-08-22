@@ -11,4 +11,4 @@ a small little fun tool to help visualize colors from a list.
 - [ ] text in contrast to the circle bg color
 - [ ] make grid like apple iwatch bubbles
 - [ ] blend colors
-- [ ] sort colors by code
+- [ ] hide alpha colors
