@@ -117,18 +117,28 @@ new Vue({
 
     // color names
     resolveColorNames(arr) {
-      let list = arr.map(el => this.tc(el).toHex());
-      const url = "https://color-names.herokuapp.com/v1/" + list.join(",");
-      const vm = this;
-      const xhttp = new XMLHttpRequest();
+      try {
+        let list = arr.map(el => this.tc(el).toHex());
+        const url =
+        "https://color-names.herokuapp.com/v1/" + list.join(",");
+        const vm = this;
+        const xhttp = new XMLHttpRequest();
 
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          return vm.colorsNames = JSON.parse(this.response).colors;
-        }
-      };
-      xhttp.open("GET", url, true);
-      xhttp.send();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            return vm.colorsNames = JSON.parse(
+            this.response).
+            colors;
+          }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+      } catch (err) {
+        this.notifs.push({
+          text: err,
+          show: true });
+
+      }
     },
     getColorName(e) {
       let v = this.tc(e).toHexString();
@@ -183,7 +193,9 @@ new Vue({
       let current = this.colorsList.join("\n");
       let removed = this.removedColors.map(e => e.v).join("\n");
 
-      let str = removed ? current + "\n\n💩Removed\n\n" + removed : current;
+      let str = removed ?
+      current + "\n\n💩Removed\n\n" + removed :
+      current;
 
       saveAs(
       new Blob([str], { type: "text/plaincharset=utf-8" }),
@@ -233,13 +245,3 @@ new Vue({
         this.resolveColorNames(val);
       }
     } } });
-
-
-
-// TODO
-// cleanup styles
-// reset data
-// text in contrast to the circle bg color
-// make grid like apple iwatch bubbles
-// blend colors
-// sort colors by code

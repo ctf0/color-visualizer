@@ -109,7 +109,7 @@
                class="colors__list">
       <transition-group name="slide-fade" tag="ul">
         <li v-for="(c, i) in colorsList" 
-            :key="c" 
+            :key="`${c}-${i}`" 
             :style="bubblePad" 
             v-if="c" 
             @click="handleClick($event, c)" 

@@ -2,8 +2,8 @@ $pad: 10px;
 $border: 4px;
 
 :root {
-  --bg: white;
-  --txt: black;
+    --bg: white;
+    --txt: black;
 }
 
 /*
@@ -14,91 +14,91 @@ $border: 4px;
 *::before,
 *::after,
 *:focus {
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  outline: none;
-  box-shadow: none;
-  border: 0;
-  box-sizing: border-box;
+    border: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    outline: none;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 
-  &::-webkit-scrollbar {
-    width: 0 !important;
-  }
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
 
 [v-cloak] {
-  display: none;
+    display: none;
 }
 
 body {
-  font-family: "Slabo 27px", serif;
-  margin: 0;
-  padding: 50px;
-  background: var(--bg);
-  color: var(--txt);
+    background: var(--bg);
+    color: var(--txt);
+    font-family: 'Slabo 27px', serif;
+    margin: 0;
+    padding: 50px;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 li {
-  padding: $pad / 5 0;
+    padding: $pad / 5 0;
 }
 
 p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 table,
 th,
 td {
-  padding: $pad $pad + 5;
-  border-bottom: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: $pad $pad + 5;
 }
 
 table {
-  margin-top: $pad;
-  border-collapse: collapse;
-  text-align: left;
+    border-collapse: collapse;
+    margin-top: $pad;
+    text-align: left;
 }
 
 th:first-of-type,
 td:first-of-type {
-  border-right: 1px solid white;
+    border-right: 1px solid white;
 }
 
 label {
-  margin-bottom: $pad / 2;
-  display: block;
+    display: block;
+    margin-bottom: $pad / 2;
 }
 
 /*
 * styles
 */
 .is-bold {
-  font-weight: bold;
-  font-size: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .notif-container {
-  position: fixed;
-  top: $pad;
-  right: $pad;
-  z-index: 2;
+    position: fixed;
+    right: $pad;
+    top: $pad;
+    z-index: 2;
 
-  .notif {
-    border-radius: $border;
-    padding: $pad;
-    margin: $pad 0;
+    .notif {
+        border-radius: $border;
+        margin: $pad 0;
+        padding: $pad;
 
-    li {
-      margin: 0;
+        li {
+            margin: 0;
+        }
     }
-  }
 }
 
 // vue anim
@@ -106,195 +106,196 @@ label {
 .slide-fade-leave-active,
 .slide-fade-up-enter-active,
 .slide-fade-up-leave-active {
-  transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .slide-fade-enter,
 .slide-fade-leave-to {
-  opacity: 0;
-  transform: translateX(10px);
+    opacity: 0;
+    transform: translateX(10px);
 }
 
 .slide-fade-up-enter,
 .slide-fade-up-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .text {
-  display: flex;
+    display: flex;
 
-  div {
-    flex: 1;
-    padding: 0 $pad * 2;
-  }
+    div {
+        flex: 1;
+        padding: 0 $pad * 2;
+    }
 }
 
 .text__left {
-  input,
-  textarea {
-    margin: $pad auto;
-    padding: $pad;
-    width: 100%;
-    border-radius: $border;
-  }
+    input,
+    textarea {
+        border-radius: $border;
+        margin: $pad auto;
+        padding: $pad;
+        width: 100%;
+    }
 
-  textarea {
-    height: 200px;
-  }
+    textarea {
+        height: 200px;
+    }
 }
 
 .text__right {
-  border-left: 1px solid white;
+    border-left: 1px solid white;
 
-  ul {
-    margin: $pad 0 $pad * 2;
-    padding-bottom: $pad;
-    border-bottom: 1px solid white;
-  }
+    ul {
+        border-bottom: 1px solid white;
+        margin: $pad 0 $pad * 2;
+        padding-bottom: $pad;
+    }
 }
 
 .total {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  margin-bottom: 0;
-  padding: $pad 0;
-  border-bottom: 1px solid white;
+    border-bottom: 1px solid white;
+    margin-bottom: 0;
+    padding: $pad 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .colors {
-  display: flex;
+    display: flex;
 }
 
 .colors__list {
-  text-transform: lowercase;
-  flex: 5;
-  text-align: center;
-  padding: $pad / 2 $pad;
-  margin-top: $pad + 5;
+    flex: 5;
+    margin-top: $pad + 5;
+    padding: $pad / 2 $pad;
+    text-align: center;
+    text-transform: lowercase;
 
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-  }
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 
 .colors__circle {
-  margin: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    transform: scale(1.25);
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
     margin: 0;
-  }
+    padding: 0.5rem;
+
+    &:hover {
+        margin: 0;
+        transform: scale(1.25);
+    }
 }
 
 .colors__sidebar {
-  flex: 1;
-  position: relative;
-  border-left: 1px solid white;
-  padding: $pad * 2;
+    border-left: 1px solid white;
+    flex: 1;
+    padding: $pad * 2;
+    position: relative;
 }
 
-input[type="range"],
-input[type="radio"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+input[type='range'],
+input[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .colors__sidebar-data {
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: $pad * 5;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: $pad * 5;
 
-  .radio {
-    margin-bottom: $pad * 2;
-    padding-bottom: $pad;
-    border-bottom: 1px solid white;
+    .radio {
+        border-bottom: 1px solid white;
+        margin-bottom: $pad * 2;
+        padding-bottom: $pad;
 
-    input[type="radio"] {
-      margin: 0 $pad / 2;
-      border-radius: 50%;
-      width: 1rem;
-      height: 1rem;
-      border: $border - 1 solid var(--brdr);
-      vertical-align: text-top;
-      background: var(--bg);
+        input[type='radio'] {
+            background: var(--bg);
+            border: $border - 1 solid var(--brdr);
+            border-radius: 50%;
+            height: 1rem;
+            margin: 0 $pad / 2;
+            vertical-align: text-top;
+            width: 1rem;
+        }
+
+        input:checked {
+            border: $border + 2 solid var(--brdr);
+        }
     }
 
-    input:checked {
-      border: $border + 2 solid var(--brdr);
+    .range {
+        border-bottom: 1px solid white;
+        margin-bottom: $pad * 2;
+        padding-bottom: $pad;
+
+        input[type='range'] {
+            border-radius: 100vw;
+            height: $pad - 3;
+            margin: $pad 0;
+            width: 100%;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                background: var(--bg);
+                border: $border - 1 solid var(--brdr);
+                border-radius: 100vw;
+                cursor: pointer;
+                height: $pad * 2;
+                width: $pad * 2;
+            }
+
+            &::-moz-range-thumb {
+                background: var(--bg);
+                border: $border - 1 solid var(--brdr);
+                border-radius: 100vw;
+                cursor: pointer;
+                height: $pad * 2;
+                width: $pad * 2;
+            }
+        }
     }
-  }
 
-  .range {
-    margin-bottom: $pad * 2;
-    padding-bottom: $pad;
-    border-bottom: 1px solid white;
+    > button {
+        margin-bottom: $pad;
+    }
 
-    input[type="range"] {
-      margin: $pad 0;
-      width: 100%;
-      height: $pad - 3;
-      border-radius: 100vw;
-
-      &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        border-radius: 100vw;
-        border: $border - 1 solid var(--brdr);
-        width: $pad * 2;
-        height: $pad * 2;
-        background: var(--bg);
+    button {
+        border-radius: $border;
         cursor: pointer;
-      }
-
-      &::-moz-range-thumb {
-        border-radius: 100vw;
-        border: $border - 1 solid var(--brdr);
-        width: $pad * 2;
-        height: $pad * 2;
-        background: var(--bg);
-        cursor: pointer;
-      }
+        padding: $pad;
+        width: 100%;
     }
-  }
 
-  > button {
-    margin-bottom: $pad;
-  }
+    ul {
+        border-radius: $border;
+        margin-bottom: $pad;
+        padding: $pad;
+    }
 
-  button {
-    border-radius: $border;
-    cursor: pointer;
-    width: 100%;
-    padding: $pad;
-  }
-
-  ul {
-    padding: $pad;
-    border-radius: $border;
-    margin-bottom: $pad;
-  }
-
-  li {
-    padding: $pad / 2 0;
-  }
+    li {
+        padding: $pad / 2 0;
+    }
 }
 
 // tippy
 .tippy-tooltip.honeybee-theme {
-  background-color: var(--txt);
-  font-weight: bold;
-  color: var(--bg);
+    background-color: var(--txt);
+    color: var(--bg);
+    font-weight: bold;
 }
 
-.tippy-popper[x-placement^="top"] .tippy-tooltip.honeybee-theme .tippy-arrow {
-  border-top-color: var(--txt);
+.tippy-popper[x-placement^='top'] .tippy-tooltip.honeybee-theme .tippy-arrow {
+    border-top-color: var(--txt);
 }
